@@ -10,6 +10,8 @@ private:
     int size;
     void printPreOrderRecursive(TreeNode* which);
     TreeNode* RecursiveInsert(TreeNode* where, int datum);
+    int RecursiveTreeHeight(TreeNode* which);
+
 
 public:
     BinarySearchTree(/* args */);
@@ -18,6 +20,7 @@ public:
     void Inorder(TreeNode* root);
     int getSize();
     void printPreOrder();
+    int TreeHeightWrapper();
 };
 
 BinarySearchTree::BinarySearchTree(/* args */)
@@ -64,6 +67,30 @@ TreeNode* BinarySearchTree::RecursiveInsert(TreeNode* root, int datum)
 void BinarySearchTree::printPreOrder()
 {
     printPreOrderRecursive(this->root);
+}
+
+int BinarySearchTree::TreeHeightWrapper()
+{
+    return RecursiveTreeHeight(root);
+
+}
+
+int BinarySearchTree::RecursiveTreeHeight(TreeNode* which)
+{
+    if (!which) {
+        return 0;
+    }
+    else {
+        /* compute the depth of each subtree */
+        int leftHeight = RecursiveTreeHeight(which->left);
+        int rightHeight = RecursiveTreeHeight(which->right);
+
+        /* use the larger one */
+        if (leftHeight > rightHeight)
+            return(leftHeight + 1);
+        else return(rightHeight + 1);
+    }
+
 }
 
 void BinarySearchTree::printPreOrderRecursive(TreeNode* which) {
