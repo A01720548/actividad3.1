@@ -1,3 +1,3 @@
-  // int height = myTree.height();
+    int height = myTree.height();
 
-    // cout << "Height: " << height << endl;
+    cout << "Height: " << height << endl;

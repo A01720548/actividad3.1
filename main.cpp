@@ -14,17 +14,17 @@ int main() {
     myTree.insert(70);
     myTree.insert(5);
 
-    // cout << endl << myTree.getSize();
-    // myTree.printPreOrder();
+    //cout << endl << myTree.getSize();
+    myTree.printPreOrder();
 
-    // int height = myTree.height();
+    int height = myTree.height();
 
-    // cout << "Height: " << height << endl;
+    cout << "Height: " << height << endl;
 
-    int level = myTree.whatLevelAmI(20);
+    int level = myTree.whatLevelAmI(5);
 
     cout << "Level: " << level << endl;
-
+    myTree.ancestors(5);
 
 
     return 0;
