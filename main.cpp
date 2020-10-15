@@ -1,3 +1,5 @@
+// Este trabajo fue elaborado por el grandioso equipo de Esteban de la Maza, Ricardo Jasso, y Raul Jerlach
+
 #include <iostream>
 #include "BinarySearchTree.h"
 
@@ -23,6 +25,15 @@ int main() {
 
     //Print Tree Preorder
     myTree.printPreOrder();
+    
+    // Print Preorder
+    myTree.visit(1);
+    // print inorder
+    myTree.visit(2);
+    // print postorder
+    myTree.visit(3);
+    // print level by level
+    myTree.visit(4);
 
     //Tree Height
     int height = myTree.height();
