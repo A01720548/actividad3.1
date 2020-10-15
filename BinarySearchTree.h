@@ -8,9 +8,12 @@ class BinarySearchTree
 private:
     TreeNode* root;
     int size;
+    int count;
+    int pos;
     void printPreOrderRecursive(TreeNode* which);
     TreeNode* RecursiveInsert(TreeNode* where, int datum);
     int RecursiveTreeHeight(TreeNode* which);
+    int RecursiveWhatLevelAmI(TreeNode* which, int datum, int);
 
 
 public:
@@ -20,13 +23,16 @@ public:
     void Inorder(TreeNode* root);
     int getSize();
     void printPreOrder();
-    int TreeHeightWrapper();
+    int height();
+    int whatLevelAmI(int);
 };
 
 BinarySearchTree::BinarySearchTree(/* args */)
 {
     this->root = nullptr;
     this->size = 0;
+    this->count = 0;
+    this->pos = 0;
 }
 
 BinarySearchTree::~BinarySearchTree()
@@ -69,10 +75,15 @@ void BinarySearchTree::printPreOrder()
     printPreOrderRecursive(this->root);
 }
 
-int BinarySearchTree::TreeHeightWrapper()
+int BinarySearchTree::height()
 {
     return RecursiveTreeHeight(root);
 
+}
+
+int BinarySearchTree::whatLevelAmI(int datum)
+{
+    return RecursiveWhatLevelAmI(root, datum, count);
 }
 
 int BinarySearchTree::RecursiveTreeHeight(TreeNode* which)
@@ -91,6 +102,27 @@ int BinarySearchTree::RecursiveTreeHeight(TreeNode* which)
         else return(rightHeight + 1);
     }
 
+}
+
+int BinarySearchTree::RecursiveWhatLevelAmI(TreeNode* which, int datum, int count)
+{
+    if (!root) {
+        return -1;
+    }
+    if (root->datum == datum) {
+        return count;
+    }
+
+    int pos = RecursiveWhatLevelAmI(root->left, datum, count + 1);
+
+    if (pos != -1) {
+        return pos;
+    }
+
+    pos = RecursiveWhatLevelAmI(root->right, datum, count + 1);
+
+
+    return pos;
 }
 
 void BinarySearchTree::printPreOrderRecursive(TreeNode* which) {
