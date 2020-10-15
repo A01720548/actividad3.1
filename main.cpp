@@ -27,12 +27,16 @@ int main() {
     myTree.printPreOrder();
     
     // Print Preorder
+    cout << "Preorder: ";
     myTree.visit(1);
     // print inorder
+    cout << "Inorder: ";
     myTree.visit(2);
     // print postorder
+    cout << "Postorder: ";
     myTree.visit(3);
     // print level by level
+    cout << "Level by Level: ";
     myTree.visit(4);
 
     //Tree Height
