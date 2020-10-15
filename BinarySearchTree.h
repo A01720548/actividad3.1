@@ -16,6 +16,10 @@ private:
     int RecursiveTreeHeight(TreeNode* which);
     int RecursiveWhatLevelAmI(TreeNode* which, int datum, int);
     bool RecursiveAncestors(TreeNode* which, int datum);
+    void visitPreorder(TreeNode* which);
+    void visitInorder(TreeNode* which);
+    void visitPostorder(TreeNode* which);
+    void visitLevel(TreeNode* which);
 
 
 public:
@@ -27,6 +31,7 @@ public:
     int height();
     int whatLevelAmI(int);
     void ancestors(int);
+    void visit(int counter)
 };
 
 BinarySearchTree::BinarySearchTree()
@@ -223,4 +228,98 @@ bool BinarySearchTree::RecursiveAncestors(TreeNode* which, int datum)
 
     return false;
 }
+
+/**
+ * @brief Preorder printing
+ * Complexity: O(n)
+ * @param which, a pointer to a TreeNode
+ */
+void BinarySearchTree::visitPreorder(TreeNode* which) {
+    if (!which) 
+        return; 
+  
+    cout << which->datum << " "; 
+  
+    visitPreorder(which->left);  
+  
+    visitPreorder(which->right); 
+}
+
+/**
+ * @brief Level by Level printing
+ * Complexity: O(n)
+ * @param which, a pointer to a TreeNode
+ */
+void BinarySearchTree::visitInorder(TreeNode* which) {
+    if (!which) 
+        return; 
+  
+    visitInorder(which->left); 
+  
+    cout << which->datum << " "; 
+  
+    visitInorder(which->right); 
+}
+
+/**
+ * @brief Postorder printing
+ * Complexity: O(n)
+ * @param which, a pointer to a TreeNode
+ */
+void BinarySearchTree::visitPostorder(TreeNode* which) {
+    if (!which) 
+        return; 
+  
+    visitPostorder(which->left); 
+  
+    visitPostorder(which->right); 
+  
+    cout << which->datum << " "; 
+}
+
+/**
+ * @brief Level by Level printing
+ * Complexity: O(n)
+ * @param which, a pointer to a TreeNode
+ */
+void BinarySearchTree::visitLevel(TreeNode* which) {
+
+    if (!which)  
+        return; 
+  
+    queue<TreeNode *> que; 
+  
+    que.push(which); 
+    while (que.empty() == false) 
+    { 
+        TreeNode *currentNode = que.front(); 
+        cout << currentNode->datum << " "; 
+        que.pop(); 
+  
+        if (currentNode->left != NULL) 
+            que.push(currentNode->left); 
+  
+        if (currentNode->right != NULL) 
+            que.push(currentNode->right); 
+    } 
+}
+
+/**
+ * @brief recieves a number and chooses appropiate function
+ * @param counter, the choosing number
+ */
+void BinarySearchTree::visit(int counter) {
+    if (counter == 1) {
+        visitPreorder(this->root);
+    } else if (counter == 2) {
+        visitInorder(this->root);
+    } else if (counter == 3) {
+        visitPostorder(this->root);
+    } else {
+        visitLevel(this->root);
+    }
+    
+}
+
+
 #endif // __BINARYSEARCHTREE_H__
